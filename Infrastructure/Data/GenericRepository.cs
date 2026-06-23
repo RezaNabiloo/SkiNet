@@ -64,6 +64,7 @@ namespace Infrastructure.Data
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
         {
+            var reza = context.Set<T>().AsQueryable().ToList();
             return SpecificationEvaluator<T>.GetQuery(context.Set<T>().AsQueryable(), spec);
         }
 
@@ -71,5 +72,14 @@ namespace Infrastructure.Data
         {
             return SpecificationEvaluator<T>.GetQuery<T, TResult>(context.Set<T>().AsQueryable(), spec);
         }
+
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            var query = context.Set<T>().AsQueryable();
+            query=spec.ApplyCriteria(query);
+
+            return await query.CountAsync(); 
+        }
+
     }
 }

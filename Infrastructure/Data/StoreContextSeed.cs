@@ -7,13 +7,13 @@ namespace Infrastructure.Data
     {
         public static async Task SeedAsync(StoreContext context)
         {
-            var productsData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/products.json");
-            var products = JsonSerializer.Deserialize<List<Product>>(productsData);
+            // var productsData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/products.json");
+            // var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
-            if (products == null) return;
+            // if (products == null) return;
 
-            context.Products.AddRange(products);
-            await context.SaveChangesAsync();
+            // context.Products.AddRange(products);
+            // await context.SaveChangesAsync();
          }
 
     }
