@@ -64,7 +64,7 @@ namespace Infrastructure.Data
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
         {
-            var reza = context.Set<T>().AsQueryable().ToList();
+           // var reza = context.Set<T>().AsQueryable().ToList();
             return SpecificationEvaluator<T>.GetQuery(context.Set<T>().AsQueryable(), spec);
         }
 

@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-   
+
     public class ProductsController(IGenericRepository<Product> repo) : BaseApiController
     {
 
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts([FromQuery] ProductSpecParams specParams)
         {
-             var spec = new ProductSpecification(specParams);            
-             return await CreatePagedResult(repo, spec, specParams.PageIndex,specParams.PageSize);
-        } 
+            var spec = new ProductSpecification(specParams);
+            return await CreatePagedResult(repo, spec, specParams.PageIndex, specParams.PageSize);
+        }
 
 
         [HttpGet("{id:int}")] //api/products/2
@@ -85,7 +85,7 @@ namespace API.Controllers
 
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<string>>> GetTypes()
-        {            
+        {
             var spec = new TypeListSpecification();
             return Ok(await repo.ListAsync(spec));
 
