@@ -1,0 +1,46 @@
+<mat-card class="max-w-lg mx-auto mt-32 p-8 bg-white">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="text-center mb-6">
+
+            <h1 class="text-3xl font-semibold text-primary">
+                <mat-icon>face_6</mat-icon>
+                Register
+            </h1>
+        </div>
+        <!-- <mat-form-field appearance="outline" class="w-full mb-4">
+            <mat-label>First Name</mat-label>
+            <input type="text" formControlName="firstName" placeholder="Reza" matInput>
+            @if(registerForm.get('firstName')?.hasError('required'))
+            {
+                <mat-error>Firstname is required.</mat-error>
+            }
+        </mat-form-field> -->
+        <app-text-input label="First name" formControlName="firstName"></app-text-input>
+        <app-text-input label="Last name" formControlName="lastName"></app-text-input>
+        <app-text-input label="Email" formControlName="email"></app-text-input>
+        <app-text-input label="Password" formControlName="password"></app-text-input>
+        
+
+        @if(validationErrors){
+            <div class="mb-3 p-4 bg-red-100 text-red-600">
+                <ul class="list-disc px-3">
+                    @for (error of validationErrors; track $index) {
+                        <li>{{error}}</li>
+                    }
+                </ul>
+            </div>
+        }
+        <button [disabled]="registerForm.invalid"
+        mat-flat-button 
+        type="submit" 
+        class="w-full py-2">
+            <mat-icon>how_to_reg</mat-icon>
+            Register
+        </button>
+    </form>
+</mat-card>
+
+<mat-card class="max-w-lg mx-auto mt-3 p-2">
+    <pre>Form values :{{registerForm.value | json}}</pre>
+    <pre>Form status :{{registerForm.status | json}}</pre>
+</mat-card>

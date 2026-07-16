@@ -9,6 +9,7 @@ import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { InitService } from './core/services/init.service';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 
 
@@ -17,7 +18,12 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    provideHttpClient(withInterceptors([errorInterceptor, loadingInterceptor])),
+    provideHttpClient(withInterceptors([
+      errorInterceptor, 
+      loadingInterceptor,
+      authInterceptor
+    
+    ])),
     //provideHttpClient(),
     provideAppInitializer(async () => {
       const initService = inject(InitService);
@@ -26,7 +32,7 @@ export const appConfig: ApplicationConfig = {
         const splash = document.getElementById('initial-splash');
         if (splash) {
           splash.remove();          
-        }        
+        }       
       })
     }),
     {
